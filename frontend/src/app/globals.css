@@ -5,6 +5,15 @@
   --foreground: #171717;
 }
 
+/* globals.css */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: white; /* Change to white */
+  color: black; /* Set text color */
+  font-family: sans-serif;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
