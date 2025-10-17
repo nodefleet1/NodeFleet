@@ -9,7 +9,7 @@ export default function Chatbot({ darkMode = false }) {
   ]);
   const [input, setInput] = useState("");
 
-  // ✅ Replaced with backend-connected async function
+  //  Replaced with backend-connected async function
   const sendMessage = async () => {
     if (!input.trim()) return;
 
