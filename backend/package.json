@@ -10,11 +10,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "type": "module",
   "dependencies": {
-<<<<<<< HEAD
-    "express": "^4.21.1"
-=======
     "body-parser": "^2.2.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
@@ -24,7 +20,5 @@
     "node-fetch": "^3.3.2",
     "nodemon": "^3.1.10",
     "openai": "^6.3.0"
->>>>>>> 2cdb73cf30530da1b4e0019f7a52d2c433713b36
   }
 }
-

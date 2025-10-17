@@ -1,14 +1,24 @@
-<<<<<<< HEAD
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
+import dotenv from "dotenv";
+import fetch from "node-fetch";
+import cors from "cors";
+
+// Setup basic paths for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load environment variables
+dotenv.config({ path: path.join(__dirname, ".env") });
 
 const app = express();
 const PORT = 5000;
 
-// Fix for __dirname in ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// Middlewares
+app.use(express.json());
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 
 // Set EJS as view engine
 app.set("view engine", "ejs");
@@ -19,50 +29,20 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // ROUTES
 app.get("/", (req, res) => {
-    res.render("login");
+  res.render("login");
 });
 
 app.post("/login", (req, res) => {
-    // You can verify username/password here
-    // For now, just redirect to index
-    res.redirect("/dashboard");
+  // You can verify username/password here
+  res.redirect("/dashboard");
 });
 
 app.get("/dashboard", (req, res) => {
-    res.render("index");
+  res.render("index");
 });
 
-app.use(express.urlencoded({ extended: true }));
-
-// Start server
-app.listen(PORT, () => {
-    console.log(`✅ Server running at http://localhost:${PORT}`);
-});
-app.use(express.static("public"));
-=======
-import dotenv from "dotenv";
-dotenv.config();
-
-import path from "path";
-import { fileURLToPath } from "url";
-
-// make sure .env is loaded correctly
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-dotenv.config({ path: path.join(__dirname, ".env") });
-
-
-import express from "express";
-import fetch from "node-fetch";
-import cors from "cors";
-
-console.log("OPENROUTER_API_KEY:", process.env.OPENROUTER_API_KEY ? "Loaded " : "Not Loaded ");
-
-const app = express();
-app.use(express.json());
-app.use(cors());
-
-const PORT = 5000;
+// Chat API Route
+console.log("OPENROUTER_API_KEY:", process.env.OPENROUTER_API_KEY ? "Loaded ✅" : "❌ Not Loaded");
 
 app.post("/api/chat", async (req, res) => {
   const userMessage = req.body.message;
@@ -75,7 +55,7 @@ app.post("/api/chat", async (req, res) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "gpt-3.5-turbo", // or try "meta-llama/llama-3.1-70b-instruct"
+        model: "gpt-3.5-turbo", // or "meta-llama/llama-3.1-70b-instruct"
         messages: [{ role: "user", content: userMessage }],
       }),
     });
@@ -91,5 +71,7 @@ app.post("/api/chat", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => console.log(` Chatbot backend running on http://localhost:${PORT}`));
->>>>>>> 2cdb73cf30530da1b4e0019f7a52d2c433713b36
+// Start server
+app.listen(PORT, () => {
+  console.log(`✅ Server running at http://localhost:${PORT}`);
+});
